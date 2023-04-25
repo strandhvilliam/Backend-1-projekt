@@ -12,40 +12,24 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Entity
-public class Customer {
+public class Item {
 
     @Id
     @GeneratedValue
     private Long id;
-
     private String name;
+    private int price;
 
-    private String ssn;
-
-    public Customer(String name, String ssn) {
+    public Item (String name, int price) {
         this.name = name;
-        this.ssn = ssn;
+        this.price = price;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id) && Objects.equals(name, customer.name) && Objects.equals(ssn, customer.ssn);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, ssn);
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", ssn='" + ssn + '\'' +
-                '}';
+        Item item = (Item) o;
+        return Objects.equals(id, item.id) && Objects.equals(name, item.name) && Objects.equals(price, item.price);
     }
 }
