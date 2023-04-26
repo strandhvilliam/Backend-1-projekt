@@ -9,10 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-@Data
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Entity
-public class Order {
+public class ShopOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,9 +23,44 @@ public class Order {
     @ManyToMany
     private List<Item> items;
 
-    public Order(LocalDate date, Customer customer, List<Item> items) {
+    public ShopOrder() {
+    }
+
+    public ShopOrder(LocalDate date, Customer customer, List<Item> items) {
         this.date = date;
         this.customer = customer;
+        this.items = items;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 
@@ -35,8 +68,8 @@ public class Order {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(date, order.date) && Objects.equals(customer, order.customer) && Objects.equals(items, order.items);
+        ShopOrder shopOrder = (ShopOrder) o;
+        return Objects.equals(id, shopOrder.id) && Objects.equals(date, shopOrder.date) && Objects.equals(customer, shopOrder.customer) && Objects.equals(items, shopOrder.items);
     }
 
     @Override

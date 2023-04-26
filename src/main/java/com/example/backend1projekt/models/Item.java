@@ -1,16 +1,13 @@
 package com.example.backend1projekt.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Objects;
 
-@Data
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Entity
 public class Item {
 
@@ -20,9 +17,48 @@ public class Item {
     private String name;
     private int price;
 
-    public Item (String name, int price) {
+    @ManyToMany(mappedBy = "items")
+    private List<ShopOrder> shopOrders;
+
+    public Item() {
+    }
+
+    public Item (String name, int price, List<ShopOrder> shopOrders) {
         this.name = name;
         this.price = price;
+        this.shopOrders = shopOrders;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public List<ShopOrder> getShopOrders() {
+        return shopOrders;
+    }
+
+    public void setShopOrders(List<ShopOrder> shopOrders) {
+        this.shopOrders = shopOrders;
     }
 
     @Override
