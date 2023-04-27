@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
@@ -25,6 +26,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
+    //Returnerar en ResponseEntity som innehåller ShopOrder om den hittas, eller ett 404 Not Found-svar om den inte hittas.
     public ResponseEntity<ShopOrder> getById(@PathVariable Long id) {
         return repository.findById(id)
                 .map(ResponseEntity::ok)
@@ -37,6 +39,9 @@ public class OrderController {
     }
 
     @PostMapping("")
+    // Hanterar POST-anrop för att skapa en ny ShopOrder.
+    // Om ordern sparas korrekt returnerar den ett 201 Created-svar med den sparade ShopOrder.
+    // Om det uppstår ett fel när ordern sparas returnerar den ett 500 Internal Server Error-svar.
     public ResponseEntity<ShopOrder> createOrder(@RequestBody ShopOrder order) {
         ShopOrder savedOrder = repository.save(order);
         ShopOrder newOrder = repository.findById(savedOrder.getId()).orElse(null);
