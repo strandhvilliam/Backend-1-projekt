@@ -2,8 +2,7 @@ package com.example.backend1projekt.controllers;
 
 
 import com.example.backend1projekt.models.ShopOrder;
-import com.example.backend1projekt.repositories.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.backend1projekt.repositories.ShopOrderRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +13,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
-    private final OrderRepository repository;
+    private final ShopOrderRepository repository;
 
-    public OrderController(OrderRepository repository) {
+    public OrderController(ShopOrderRepository repository) {
         this.repository = repository;
     }
 

@@ -15,6 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,6 +49,7 @@ class CustomerControllerTest {
     }
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private final Logger logger = org.slf4j.LoggerFactory.getLogger(CustomerControllerTest.class);
 
     @Test
    void testGetCustomers() throws Exception {
@@ -77,13 +79,11 @@ class CustomerControllerTest {
     @Test
     void testPostCustomer() throws Exception {
 
-        String json = "{\"id\":3,\"name\":\"Test\",\"ssn\":\"12345\",\"shopOrders\":[]}";
         this.mockMvc.perform(post("/customers")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(json))
+                .content(objectMapper.writeValueAsString(new Customer("Test", "12345", new ArrayList<>()))))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"id\":3,\"name\":\"Test\",\"ssn\":\"12345\",\"shopOrders\":[]}", true));
-
+                .andExpect(content().string("Customer Test created"));
 
     }
 
