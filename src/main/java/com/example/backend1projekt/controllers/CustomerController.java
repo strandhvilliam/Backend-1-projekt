@@ -28,6 +28,7 @@ public class CustomerController {
 
     @PostMapping("/customers")
     public Customer createCustomer(@RequestBody Customer customer) {
-        return this.repository.save(customer);
+        this.repository.save(customer);
+        return customer;
     }
 }
