@@ -1,9 +1,7 @@
 package com.example.backend1projekt.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,6 +16,7 @@ public class Item {
     private int price;
 
     @ManyToMany(mappedBy = "items")
+    @JsonIgnore
     private List<ShopOrder> shopOrders;
 
     public Item() {

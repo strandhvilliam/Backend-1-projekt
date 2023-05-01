@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<form action="#" th:action="@{/form/customer}" th:object="${customerData}" method="post">
+
+    <table>
+        <tr>
+            <td>
+                <label>
+                    <input th:type="text" th:field="*{name}" th:placeholder="Name"/>
+                </label>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <input th:type="text" th:field="*{ssn}" th:placeholder="Ssn"/>
+                </label>
+            </td>
+        </tr>
+    </table>
+
+    <label>
+        <input th:type="submit" th:value="Submit">
+    </label>
+
+
+</form>
+
+</body>
+</html>

@@ -20,7 +20,7 @@ public class OrderController {
     }
 
     @GetMapping("")
-    public List<ShopOrder> getAll() {
+    public List<ShopOrder> getAllOrders() {
         return repository.findAll();
     }
 
@@ -50,6 +50,8 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+
 }
 
 
