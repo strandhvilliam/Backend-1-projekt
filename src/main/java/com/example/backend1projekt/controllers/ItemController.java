@@ -37,6 +37,12 @@ public class ItemController {
         return this.itemRepository.findById(id).orElse(null);
     }
 
+    @PostMapping("/item/add")
+    public List <Item> addNewItem (@RequestBody Item item) {
+        this.itemRepository.save(item);
+        return this.itemRepository.findAll();
+    }
+
     @PostMapping ("/items/buy")
     public List <ShopOrder> newShopOrderByID (@RequestBody Map <String, Long> body) {
         Long itemID = body.get("itemID");
