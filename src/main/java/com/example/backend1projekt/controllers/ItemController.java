@@ -7,9 +7,12 @@ import com.example.backend1projekt.models.ShopOrder;
 import com.example.backend1projekt.repositories.CustomerRepository;
 import com.example.backend1projekt.repositories.ItemRepository;
 import com.example.backend1projekt.repositories.ShopOrderRepository;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +56,8 @@ public class ItemController {
         this.shopOrderRepository.save(shopOrder);
         return this.shopOrderRepository.findAll();
     }
+
+
 
 
 }

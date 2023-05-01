@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<form action="#" th:action="@{/form/order}" th:object="${orderData}" method="post">
+
+    <table>
+        <tr th:each="item: ${allItems}">
+            <td th:text="${item.getId()}"></td>
+            <td th:text="${item.getName()}"></td>
+            <td><label >
+                <input th:id="${item.getId()}" th:field="*{itemIds}"  th:value="${item.getId()}" th:name="${item.getId()}" type="checkbox">
+            </label></td>
+        </tr>
+    </table>
+    <label>
+        <input th:type="text" th:field="*{customerSsn}" th:placeholder="Ssn"/>
+    </label>
+
+    <label>
+        <input th:type="submit" th:value="Submit">
+    </label>
+</form>
+
+</body>
+</html>

@@ -50,6 +50,14 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+
+    @PostMapping("/form")
+    public String getSuccess(@ModelAttribute ShopOrder order) {
+        System.out.println(order);
+//        repository.save(order);
+        return "success";
+    }
 }
 
 
