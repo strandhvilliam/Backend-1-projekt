@@ -20,7 +20,7 @@ public class OrderController {
     }
 
     @GetMapping("")
-    public List<ShopOrder> getAll() {
+    public List<ShopOrder> getAllOrders() {
         return repository.findAll();
     }
 

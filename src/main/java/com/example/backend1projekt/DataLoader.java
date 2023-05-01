@@ -17,13 +17,14 @@ import java.util.ArrayList;
 public class DataLoader implements CommandLineRunner {
 
     private final CustomerRepository customerRepository;
-
+    private final ShopOrderRepository shopOrderRepository;
     private final ItemRepository itemRepository;
 
-
-    public DataLoader(CustomerRepository customerRepository, ItemRepository itemRepository) {
+    public DataLoader(CustomerRepository customerRepository, ItemRepository itemRepository,
+                      ShopOrderRepository shopOrderRepository) {
         this.customerRepository = customerRepository;
         this.itemRepository = itemRepository;
+        this.shopOrderRepository = shopOrderRepository;
     }
     @Override
     public void run(String... args) throws Exception {
@@ -34,7 +35,9 @@ public class DataLoader implements CommandLineRunner {
 
         this.itemRepository.save(new Item("Banan", 10, new ArrayList<>()));
         this.itemRepository.save(new Item("Äpple", 20, new ArrayList<>()));
+        this.itemRepository.save(new Item("Päron", 100, new ArrayList<>()));
 
-
+        this.shopOrderRepository.save(new ShopOrder(LocalDate.now(), this.customerRepository.findById(1L).orElse(null),
+              new ArrayList<>()));
     }
 }
