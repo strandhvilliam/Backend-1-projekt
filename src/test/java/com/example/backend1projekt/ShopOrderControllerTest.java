@@ -1,6 +1,7 @@
 package com.example.backend1projekt;
 
 import com.example.backend1projekt.models.Customer;
+import com.example.backend1projekt.repositories.CustomerRepository;
 import com.example.backend1projekt.repositories.ShopOrderRepository;
 import com.example.backend1projekt.models.ShopOrder;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,9 +18,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -37,6 +40,9 @@ public class ShopOrderControllerTest {
     @MockBean
     private ShopOrderRepository shopOrderRepository;
 
+    @MockBean
+    private CustomerRepository customerRepository;
+
     @BeforeEach
     void clearDatabase() {
         shopOrderRepository.deleteAll();
@@ -51,18 +57,21 @@ public class ShopOrderControllerTest {
         when(shopOrderRepository.findAll()).thenReturn(List.of(order1, order2));
 
         mockMvc.perform(get("/orders"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)));
     }
 
     @Test
     void testGetOrderById() throws Exception {
         Customer c2 = new Customer("marcel", "98765", new ArrayList<>());
         ShopOrder order1 = new ShopOrder(LocalDate.now(), c2, new ArrayList<>());
-        when(shopOrderRepository.findById(order1.getId())).thenReturn(java.util.Optional.of(order1));
+        when(shopOrderRepository.findById(anyLong())).thenReturn(java.util.Optional.of(order1));
 
-        mockMvc.perform(get("/orders/{id}", order1.getId()))
-                .andExpect(status().isOk());
+        mockMvc.perform(get("/orders/{id}", 1L)) // Pass any non-null ID here
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(order1.getId()));
     }
+
 
     @Test
     void testGetOrdersByCustomerId() throws Exception {
@@ -78,7 +87,8 @@ public class ShopOrderControllerTest {
         when(shopOrderRepository.findByCustomerId(2L)).thenReturn(List.of(order3));
 
         mockMvc.perform(get("/orders/customer/{customerId}", 1))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)));
 
         mockMvc.perform(get("/orders/customer/{customerId}", 2))
                 .andExpect(status().isOk())
@@ -90,13 +100,19 @@ public class ShopOrderControllerTest {
         Customer c1 = new Customer("oliver", "87765", new ArrayList<>());
         ShopOrder order = new ShopOrder(LocalDate.now(), c1, new ArrayList<>());
 
-        // Save order with mock data to repository
+        // Set a specific ID for the created order
+        order.setId(1L);
+
+        when(customerRepository.findById(anyLong())).thenReturn(Optional.of(c1));
         when(shopOrderRepository.save(any(ShopOrder.class))).thenReturn(order);
+        // Mock the findById method to return the order with a specific ID
+        when(shopOrderRepository.findById(order.getId())).thenReturn(Optional.of(order));
 
         mockMvc.perform(post("/orders")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(order)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").exists());
+                .andExpect(jsonPath("$.id").value(1L)); // Check if the returned ShopOrder has the correct ID
     }
+
 }
