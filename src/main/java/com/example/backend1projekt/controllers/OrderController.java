@@ -52,12 +52,6 @@ public class OrderController {
     }
 
 
-    @PostMapping("/form")
-    public String getSuccess(@ModelAttribute ShopOrder order) {
-        System.out.println(order);
-//        repository.save(order);
-        return "success";
-    }
 }
 
 

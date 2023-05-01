@@ -29,13 +29,13 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        this.customerRepository.save(new Customer("Kalle", "1234567890", new ArrayList<>()));
+        /*this.customerRepository.save(new Customer("Kalle", "1234567890", new ArrayList<>()));
         this.customerRepository.save(new Customer("Pelle", "0987654321", new ArrayList<>()));
         this.customerRepository.save(new Customer("Nisse", "1231231231", new ArrayList<>()));
 
         this.itemRepository.save(new Item("Banan", 10, new ArrayList<>()));
         this.itemRepository.save(new Item("Äpple", 20, new ArrayList<>()));
-        this.itemRepository.save(new Item("Päron", 100, new ArrayList<>()));
+        this.itemRepository.save(new Item("Päron", 100, new ArrayList<>()));*/
 
 //        this.shopOrderRepository.save(new ShopOrder(LocalDate.now(), this.customerRepository.findById(1L).orElse(null),
 //              new ArrayList<>()));
