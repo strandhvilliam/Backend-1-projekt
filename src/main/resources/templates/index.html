@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1 th:text="${title}"></h1>
+
+<nav>
+    <ul>
+        <li><a th:href="@{/view/items}" th:text="${showItemsTxt}"></a></li>
+        <li><a th:href="@{/view/customers}" th:text="${showCustomersTxt}"></a></li>
+        <li><a th:href="@{/view/orders}" th:text="${showOrdersTxt}"></a></li>
+        <li><a th:href="@{/form/customer}" th:text="${formCustomerTxt}"></a></li>
+        <li><a th:href="@{/form/item}" th:text="${formItemTxt}"></a></li>
+        <li><a th:href="@{/form/order}" th:text="${formOrderTxt}">Add Order Form</a></li>
+    </ul>
+</nav>
+
+</body>
+</html>

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Component
@@ -37,7 +38,9 @@ public class DataLoader implements CommandLineRunner {
         this.itemRepository.save(new Item("Äpple", 20, new ArrayList<>()));
         this.itemRepository.save(new Item("Päron", 100, new ArrayList<>()));*/
 
-//        this.shopOrderRepository.save(new ShopOrder(LocalDate.now(), this.customerRepository.findById(1L).orElse(null),
-//              new ArrayList<>()));
+        /*this.shopOrderRepository.save(new ShopOrder(LocalDate.now(), this.customerRepository.findById(1L).orElse(null),
+              new ArrayList<>()));
+        this.shopOrderRepository.save(new ShopOrder(LocalDate.now(), this.customerRepository.findById(1L).orElse(null),
+              new ArrayList<>(List.of(this.itemRepository.findById(1L).orElse(null)))));*/
     }
 }
