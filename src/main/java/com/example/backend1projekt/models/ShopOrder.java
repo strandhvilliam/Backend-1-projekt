@@ -18,7 +18,7 @@ public class ShopOrder {
 
     private LocalDate date;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     private Customer customer;
 
     @ManyToMany

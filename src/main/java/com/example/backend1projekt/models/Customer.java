@@ -1,5 +1,6 @@
 package com.example.backend1projekt.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -19,16 +20,12 @@ public class Customer {
 
     private String ssn;
 
-    @OneToMany
-    private List<ShopOrder> shopOrders;
-
     public Customer() {
     }
 
     public Customer(String name, String ssn, List<ShopOrder> shopOrders) {
         this.name = name;
         this.ssn = ssn;
-        this.shopOrders = shopOrders;
     }
 
     public Long getId() {
@@ -55,25 +52,17 @@ public class Customer {
         this.ssn = ssn;
     }
 
-    public List<ShopOrder> getShopOrders() {
-        return shopOrders;
-    }
-
-    public void setShopOrders(List<ShopOrder> shopOrders) {
-        this.shopOrders = shopOrders;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id) && Objects.equals(name, customer.name) && Objects.equals(ssn, customer.ssn) && Objects.equals(shopOrders, customer.shopOrders);
+        return Objects.equals(id, customer.id) && Objects.equals(name, customer.name) && Objects.equals(ssn, customer.ssn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, ssn, shopOrders);
+        return Objects.hash(id, name, ssn);
     }
 
     @Override
@@ -81,8 +70,6 @@ public class Customer {
         return "Customer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", ssn='" + ssn + '\'' +
-                ", orders=" + shopOrders +
-                '}';
+                ", ssn='" + ssn + '}';
     }
 }
