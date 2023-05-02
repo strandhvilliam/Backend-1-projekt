@@ -12,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
-public class OrderController {
+public class ShopOrderController  {
     private final ShopOrderRepository repository;
 
-    public OrderController(ShopOrderRepository repository) {
+    public ShopOrderController (ShopOrderRepository repository) {
         this.repository = repository;
     }
 
