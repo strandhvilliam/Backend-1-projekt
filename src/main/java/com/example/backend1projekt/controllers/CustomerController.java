@@ -3,8 +3,6 @@ package com.example.backend1projekt.controllers;
 
 import com.example.backend1projekt.models.Customer;
 import com.example.backend1projekt.repositories.CustomerRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -41,20 +41,21 @@ public class ItemController {
     }
 
     @PostMapping("/item/add")
-    public List <Item> addNewItem (@RequestBody Item item) {
+    public String addNewItem (@RequestBody Item item) {
         this.itemRepository.save(item);
-        return this.itemRepository.findAll();
+        return "Item " + item.getName() + " created";
     }
 
     @PostMapping ("/items/buy")
-    public List <ShopOrder> newShopOrderByID (@RequestBody Map <String, Long> body) {
+    public String newShopOrderByID (@RequestBody Map <String, Long> body) {
         Long itemID = body.get("itemID");
         Long customerID = body.get("customerID");
         Item i = this.itemRepository.findById(itemID).orElse(null);
         Customer c = this.customerRepository.findById(customerID).orElse(null);
         ShopOrder shopOrder = new ShopOrder(LocalDate.now(), c, List.of(i));
         this.shopOrderRepository.save(shopOrder);
-        return this.shopOrderRepository.findAll();
+        return "Customer " + shopOrder.getCustomer().getName() +
+                " made a new purchase on Item " + shopOrder.getItems().get(0).getName();
     }
 
 
