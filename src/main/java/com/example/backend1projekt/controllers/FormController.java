@@ -30,10 +30,6 @@ public class FormController {
 
     }
 
-
-
-
-
     @GetMapping("/form/order")
     public String getForm (Model model) {
         model.addAttribute("allItems", this.itemRepository.findAll());
@@ -58,7 +54,7 @@ public class FormController {
 
     @PostMapping("/form/customer")
     public String postCustomerForm (@ModelAttribute CustomerFormAttribute body) {
-        Customer customer = new Customer(body.getName(), body.getSsn(), new ArrayList<>());
+        Customer customer = new Customer(body.getName(), body.getSsn());
         this.customerRepository.save(customer);
         return "redirect:/form/success/" + customer.getName();
     }
@@ -71,7 +67,7 @@ public class FormController {
 
     @PostMapping("/form/item")
     public String postItemForm (@ModelAttribute ItemFormAttribute body) {
-        Item item = new Item(body.getName(), body.getPrice(), new ArrayList<>());
+        Item item = new Item(body.getName(), body.getPrice());
         this.itemRepository.save(item);
         return "redirect:/form/success/" + item.getName();
     }

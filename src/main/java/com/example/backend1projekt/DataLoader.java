@@ -30,17 +30,17 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        /*this.customerRepository.save(new Customer("Kalle", "1234567890", new ArrayList<>()));
-        this.customerRepository.save(new Customer("Pelle", "0987654321", new ArrayList<>()));
-        this.customerRepository.save(new Customer("Nisse", "1231231231", new ArrayList<>()));
+        this.customerRepository.save(new Customer("Kalle", "1234567890"));
+        this.customerRepository.save(new Customer("Pelle", "0987654321"));
+        this.customerRepository.save(new Customer("Nisse", "1231231231"));
 
-        this.itemRepository.save(new Item("Banan", 10, new ArrayList<>()));
-        this.itemRepository.save(new Item("Äpple", 20, new ArrayList<>()));
-        this.itemRepository.save(new Item("Päron", 100, new ArrayList<>()));*/
+        this.itemRepository.save(new Item("Banan", 10));
+        this.itemRepository.save(new Item("Äpple", 20.2));
+        this.itemRepository.save(new Item("Päron", 13.3));
 
-        /*this.shopOrderRepository.save(new ShopOrder(LocalDate.now(), this.customerRepository.findById(1L).orElse(null),
-              new ArrayList<>()));
+        this.shopOrderRepository.save(new ShopOrder(LocalDate.now(), this.customerRepository.findById(3L).orElse(null),
+              new ArrayList<>(List.of(this.itemRepository.findById(3L).get()))));
         this.shopOrderRepository.save(new ShopOrder(LocalDate.now(), this.customerRepository.findById(1L).orElse(null),
-              new ArrayList<>(List.of(this.itemRepository.findById(1L).orElse(null)))));*/
+              new ArrayList<>(List.of(this.itemRepository.findById(1L).get(), this.itemRepository.findById(2L).get()))));
     }
 }

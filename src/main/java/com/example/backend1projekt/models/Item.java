@@ -1,31 +1,33 @@
 package com.example.backend1projekt.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "item")
 public class Item {
 
     @Id
     @GeneratedValue
     private Long id;
     private String name;
-    private int price;
+    private double price;
 
     @ManyToMany(mappedBy = "items")
     @JsonIgnore
-    private List<ShopOrder> shopOrders;
+    private List<ShopOrder> shopOrders = new ArrayList<>();
 
     public Item() {
     }
 
-    public Item (String name, int price, List<ShopOrder> shopOrders) {
+    public Item (String name, double price) {
         this.name = name;
         this.price = price;
-        this.shopOrders = shopOrders;
     }
 
     public Long getId() {
@@ -44,11 +46,11 @@ public class Item {
         this.name = name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -58,13 +60,5 @@ public class Item {
 
     public void setShopOrders(List<ShopOrder> shopOrders) {
         this.shopOrders = shopOrders;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
-        return Objects.equals(id, item.id) && Objects.equals(name, item.name) && Objects.equals(price, item.price);
     }
 }

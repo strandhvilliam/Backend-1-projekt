@@ -1,5 +1,7 @@
 package com.example.backend1projekt.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "shop_order")
 public class ShopOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +22,13 @@ public class ShopOrder {
     private LocalDate date;
 
     @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @ManyToMany
+    @JoinTable(name = "items_shop_orders",
+            joinColumns = @JoinColumn(name = "shop_order_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items;
 
     public ShopOrder() {
@@ -63,29 +70,6 @@ public class ShopOrder {
 
     public void setItems(List<Item> items) {
         this.items = items;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ShopOrder shopOrder = (ShopOrder) o;
-        return Objects.equals(id, shopOrder.id) && Objects.equals(date, shopOrder.date) && Objects.equals(customer, shopOrder.customer) && Objects.equals(items, shopOrder.items);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, date, customer, items);
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", date=" + date +
-                ", customer=" + customer +
-                ", items=" + items +
-                '}';
     }
 }
 

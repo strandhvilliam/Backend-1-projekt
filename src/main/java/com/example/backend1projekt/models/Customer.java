@@ -1,5 +1,7 @@
 package com.example.backend1projekt.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -9,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "customer")
 public class Customer {
 
     @Id
@@ -19,16 +22,16 @@ public class Customer {
 
     private String ssn;
 
-    @OneToMany
+    @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     private List<ShopOrder> shopOrders;
 
     public Customer() {
     }
 
-    public Customer(String name, String ssn, List<ShopOrder> shopOrders) {
+    public Customer(String name, String ssn) {
         this.name = name;
         this.ssn = ssn;
-        this.shopOrders = shopOrders;
     }
 
     public Long getId() {
@@ -61,28 +64,5 @@ public class Customer {
 
     public void setShopOrders(List<ShopOrder> shopOrders) {
         this.shopOrders = shopOrders;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id) && Objects.equals(name, customer.name) && Objects.equals(ssn, customer.ssn) && Objects.equals(shopOrders, customer.shopOrders);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, ssn, shopOrders);
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", ssn='" + ssn + '\'' +
-                ", orders=" + shopOrders +
-                '}';
     }
 }
