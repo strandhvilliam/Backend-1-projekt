@@ -44,16 +44,16 @@ public class ItemControllerTest {
     @BeforeEach
     public void init() {
 
-        Item i1 = new Item("Vindruvor", 50, new ArrayList<>());
-        Item i2 = new Item("Banan", 25, new ArrayList<>());
-        Item i3 = new Item("Papaya", 100, new ArrayList<>());
+        Item i1 = new Item("Vindruvor", 50);
+        Item i2 = new Item("Banan", 25);
+        Item i3 = new Item("Papaya", 100);
 
         when(itemRepository.findById(1L)).thenReturn(Optional.of(i1));
         when(itemRepository.findById(2L)).thenReturn(Optional.of(i2));
         when(itemRepository.findById(3L)).thenReturn(Optional.of(i3));
         when(itemRepository.findAll()).thenReturn(Arrays.asList(i1, i2, i3));
 
-        Customer c = new Customer("Vic", "444555", new ArrayList<>());
+        Customer c = new Customer("Vic", "444555");
         when(customerRepository.findById(1L)).thenReturn(Optional.of(c));
 
         ShopOrder s1 = new ShopOrder(LocalDate.now(), c, List.of(i1));
@@ -63,9 +63,9 @@ public class ItemControllerTest {
     @Test
     void testGetAllItems() throws Exception {
 
-        List<Item> correct = List.of(new Item("Vindruvor", 50, new ArrayList<>()),
-                new Item("Banan", 25, new ArrayList<>()),
-                new Item("Papaya", 100, new ArrayList<>()));
+        List<Item> correct = List.of(new Item("Vindruvor", 50),
+                new Item("Banan", 25),
+                new Item("Papaya", 100));
 
         this.mockMvc.perform(get("/items"))
                 .andExpect(status().isOk())
@@ -77,7 +77,7 @@ public class ItemControllerTest {
     @Test
     void testGetItemById () throws Exception {
 
-        Item correct = new Item("Vindruvor", 50, new ArrayList<>());
+        Item correct = new Item("Vindruvor", 50);
         this.mockMvc.perform(get("/item/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(
@@ -91,7 +91,7 @@ public class ItemControllerTest {
 
         this.mockMvc.perform(post("/item/add")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(new Item ("Jacka", 500, new ArrayList<>()))))
+                        .content(objectMapper.writeValueAsString(new Item ("Jacka", 500))))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Item Jacka created"));
 

@@ -36,8 +36,8 @@ class CustomerControllerTest {
 
     @BeforeEach
     public void init() {
-        Customer c1 = new Customer("Test", "12345", new ArrayList<>());
-        Customer c2 = new Customer("Test2", "54321", new ArrayList<>());
+        Customer c1 = new Customer("Test", "12345");
+        Customer c2 = new Customer("Test2", "54321");
 
         when(mockRepo.findById(1L)).thenReturn(Optional.of(c1));
         when(mockRepo.findById(2L)).thenReturn(Optional.of(c2));
@@ -51,7 +51,7 @@ class CustomerControllerTest {
     @Test
    void testGetCustomers() throws Exception {
 
-        List<Customer> correct = List.of(new Customer("Test", "12345", new ArrayList<>()), new Customer("Test2", "54321", new ArrayList<>()));
+        List<Customer> correct = List.of(new Customer("Test", "12345"), new Customer("Test2", "54321"));
 
         this.mockMvc.perform(get("/customers"))
                 .andExpect(status().isOk())
@@ -63,7 +63,7 @@ class CustomerControllerTest {
     @Test
     void testGetCustomerById() throws Exception {
 
-        Customer correct = new Customer("Test", "12345", new ArrayList<>());
+        Customer correct = new Customer("Test", "12345");
 
         this.mockMvc.perform(get("/customers/1"))
                 .andExpect(status().isOk())
@@ -78,7 +78,7 @@ class CustomerControllerTest {
 
         this.mockMvc.perform(post("/customers")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(new Customer("Test", "12345", new ArrayList<>()))))
+                .content(objectMapper.writeValueAsString(new Customer("Test", "12345"))))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Customer Test created"));
 

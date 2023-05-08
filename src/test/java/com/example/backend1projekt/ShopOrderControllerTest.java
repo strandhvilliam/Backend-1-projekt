@@ -50,8 +50,8 @@ public class ShopOrderControllerTest {
 
     @Test
     void testGetAllOrders() throws Exception {
-        Customer c1 = new Customer("Test", "12345", new ArrayList<>());
-        Customer c2 = new Customer("Test2", "54321", new ArrayList<>());
+        Customer c1 = new Customer("Test", "12345");
+        Customer c2 = new Customer("Test2", "54321");
         ShopOrder order1 = new ShopOrder(LocalDate.now(), c1, new ArrayList<>());
         ShopOrder order2 = new ShopOrder(LocalDate.now(), c2, new ArrayList<>());
         when(shopOrderRepository.findAll()).thenReturn(List.of(order1, order2));
@@ -63,7 +63,7 @@ public class ShopOrderControllerTest {
 
     @Test
     void testGetOrderById() throws Exception {
-        Customer c2 = new Customer("marcel", "98765", new ArrayList<>());
+        Customer c2 = new Customer("marcel", "98765");
         ShopOrder order1 = new ShopOrder(LocalDate.now(), c2, new ArrayList<>());
         when(shopOrderRepository.findById(anyLong())).thenReturn(java.util.Optional.of(order1));
 
@@ -75,9 +75,9 @@ public class ShopOrderControllerTest {
 
     @Test
     void testGetOrdersByCustomerId() throws Exception {
-        Customer c1 = new Customer("Marcel", "98765", new ArrayList<>());
-        Customer c2 = new Customer("Sam", "12345", new ArrayList<>());
-        Customer c3 = new Customer("Vincent", "87654", new ArrayList<>());
+        Customer c1 = new Customer("Marcel", "98765");
+        Customer c2 = new Customer("Sam", "12345");
+        Customer c3 = new Customer("Vincent", "87654");
         ShopOrder order1 = new ShopOrder(LocalDate.now(), c1, new ArrayList<>());
         ShopOrder order2 = new ShopOrder(LocalDate.now(), c2, new ArrayList<>());
         ShopOrder order3 = new ShopOrder(LocalDate.now(), c3, new ArrayList<>());
@@ -97,7 +97,7 @@ public class ShopOrderControllerTest {
 
     @Test
     void testCreateOrder() throws Exception {
-        Customer c1 = new Customer("oliver", "87765", new ArrayList<>());
+        Customer c1 = new Customer("oliver", "87765");
         ShopOrder order = new ShopOrder(LocalDate.now(), c1, new ArrayList<>());
 
         // Set a specific ID for the created order
