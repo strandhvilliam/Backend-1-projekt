@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <title>Title</title>
 </head>
 <body>
 
-<h1 th:text="${title}"></h1>
+<main class="main view--items">
 
-<table>
-  <tr th:each="item: ${items}">
-    <td th:text="${item.getId()}"></td>
-    <td th:text="${item.getName()}"></td>
-  </tr>
-</table>
+    <h1 class="title" th:text="${title}"></h1>
+
+    <ul class="view__list">
+        <li class="view__list-item" th:each="item: ${items}">
+            <div class="view__item-detail">
+                <span class="view__detail-label">ID:</span>
+                <span th:text="${item.getId()}"></span>
+            </div>
+            <div class="view__item-detail">
+                <span class="view__detail-label">PRODUCT: </span>
+                <span th:text="${item.getName()}"></span>
+            </div>
+        </li>
+    </ul>
+</main>
+
 </body>
 </html>

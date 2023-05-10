@@ -2,18 +2,31 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <title>Title</title>
 </head>
 <body>
+<main class="main">
+    <h1 class="title" th:text="${title}"></h1>
+    <ul class="view__list">
+        <li class="view__list-item " th:each="customer: ${customers}">
+            <div class="view__item-detail">
+                <span class="view__detail-label">ID:</span>
+                <span th:text="${customer.getId()}"></span>
+            </div>
+            <div class="view__item-detail">
+                <span class="view__detail-label">NAME:</span>
+                <span th:text="${customer.getName()}"></span>
+            </div>
 
-<h1 th:text="${title}"></h1>
+            <div class="view__item-detail">
+                <span class="view__detail-label">SSN:</span>
+                <span th:text="${customer.getSsn()}"></span>
+            </div>
+        </li>
+    </ul>
 
-<table>
-    <tr th:each="customer: ${customers}">
-        <td th:text="${customer.getId()}"></td>
-        <td th:text="${customer.getName()}"></td>
-        <td th:text="${customer.getSsn()}"></td>
-    </tr>
-</table>
+</main>
+
 </body>
 </html>

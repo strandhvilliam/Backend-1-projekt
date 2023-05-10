@@ -2,21 +2,36 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
   <title>Title</title>
 </head>
 <body>
 
-<h1 th:text="${title}"></h1>
+<main class="main view--orders">
 
-  <table>
-    <tr th:each="order: ${orders}">
-      <td th:text="${order.getId()}"></td>
-      <td th:text="${order.getCustomer().getName()}"></td>
-      <td th:each="item: ${order.getItems()}">
-        <span>----</span>
-        <span th:text="${item.getName()}"></span>
-      </td>
-    </tr>
-  </table>
+<h1 class="title" th:text="${title}"></h1>
+
+  <ul class="view__list">
+    <li class="view__list-item " th:each="order: ${orders}">
+      <div class="orders-main__list">
+        <div class="view__item-detail">
+          <span class="view__detail-label">ORDER ID:</span>
+          <span th:text="${order.getId()}"></span>
+        </div>
+        <div class="view__item-detail">
+          <span class="view__detail-label">CUSTOMER: </span>
+          <span th:text="${order.getCustomer().getName()}"></span>
+        </div>
+      </div>
+      <ul class="order-items__list" >
+        <li th:each="item: ${order.getItems()}" class="orders-item__detail">
+          <span th:text="${item.getName()}"></span>
+          <span class="order-detail__price" th:text="${item.getPrice()}"></span>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</main>
 </body>
 </html>
